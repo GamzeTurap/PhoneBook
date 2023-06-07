@@ -1,0 +1,93 @@
+﻿@model MemberViewModel
+@{
+    ViewData["Title"] = "MemberEdit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h3>Üye Bilgileri</h3>
+<form asp-area="admin" asp-controller="Home" asp-action="MemberEdit" method="post" enctype="multipart/form-data">
+<section class="content">
+    <div class="container-fluid">
+        <div class="row" id="memberedit">
+            <div class="col-5">
+                @if (Model.Picture != null)
+                {
+                    <img class="profile-user-img img-fluid img-circle"
+                        src="@Model.Picture" alt="User Image">
+
+                }
+                else
+                {
+                    if (Model.Gender == 1) //kadın
+                    {
+                        <img src="~/MemberPictures/anonimkadin.jpg"
+                     alt="User Image">
+
+                    }
+                    else
+                    {
+                        <img src="~/MemberPictures/anonimerkek.jpg"
+                     alt="User Image">
+                    }
+                }
+
+                <div class="form-group col-5">
+                    <label style="font-weight:bold">Resim:</label>
+                    <input type="file" class="form-control" asp-for="UploadPicture" />
+                </div> <br />
+            </div>
+
+            <div class="col-7">
+
+            
+                    <div class="text-danger" asp-validation-summary="All"></div>
+
+                    <input type="hidden" asp-for="Email" />
+                    <div class="row">
+                        <div class="form-group col-sm-5">
+                            <label style="font-weight:bold">İsim:</label>
+                            <input type="text" class="form-control" asp-for="Name" />
+                            <span class="text-danger" asp-validation-for="Name"></span>
+                        </div> <br />
+
+                        <div class="form-group col-sm-5">
+                            <label style="font-weight:bold">Soyisim:</label>
+                            <input type="text" class="form-control" asp-for="Surname" />
+                        </div> <br />
+                    </div>
+                    <div class="row">
+                    <div class="form-group col-sm-5">
+                        <label style="font-weight:bold">Doğum Tarihi:</label>
+                        <input type="date" class="form-control" asp-for="BirthDate" />
+                    </div> <br />
+
+                    <div class="form-group col-sm-5">
+                        <label style="font-weight:bold">Cinsiyet:</label>
+                        <select class="form-control" asp-for="Gender">
+                            <option value="1">Kadın</option>
+                            <option value="2">Erkek</option>
+                        </select>
+                    </div> <br />
+                    </div>
+                  
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info container">GÜNCELLE</button>
+                    </div> <br />
+
+                
+            </div>
+
+        </div>
+    </div>
+</section>
+</form>
+
+@section PageCss{
+
+   #memberedit img{
+        width:300px !important;
+        height:300px !important;
+    }
+
+}
